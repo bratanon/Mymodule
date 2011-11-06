@@ -1,0 +1,4 @@
+name = My Module - (linkit extender)
+description = Linkit examples of hooks and alters
+core = 7.x
+dependencies[] = linkit
