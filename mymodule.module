@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+
 
 /**
  * Implements hook_linkit_attributes().
@@ -9,7 +11,7 @@ function mymodule_linkit_attributes($profile) {
   $attributes['my_attribute'] = array(
     '#type' => 'textfield',
     '#title' => t('My Attribute'),
-    '#maxlength' => 255,  
+    '#maxlength' => 255,
     '#size' => 40,
     '#default_value' => '',
     '#weight' => isset($profile->data['attributes']['my_attribute']['weight']) ? $profile->data['attributes']['my_attribute']['weight'] : 0,
@@ -24,46 +26,22 @@ function mymodule_linkit_attributes_alter(&$attributes) {
   $attributes['rel']['#type'] = 'select';
   $attributes['rel']['#title'] = t('Rel select');
   $attributes['rel']['#options'] = array(
-    '' => t('None'), 
-    'now-follow' => t('No follow'), 
+    '' => t('None'),
+    'no-follow' => t('No follow'),
     'other-rel' =>t('Other rel'),
   );
   $attributes['rel']['#size'] = 1;
 }
 
 /**
- * Implements hook_linkit_plugins().
+ * Implements hook_ctools_plugin_directory().
  */
-function mymodule_linkit_plugins() {
-  $plugins['myplugin'] = array(
-    'title' => t('My plugin'),
-    'description' => t('My plugin implementation'),
-    'autocomplete callback' => 'mymodule_autocomplete',
-  );
-  return $plugins;
+function mymodule_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'linkit' && !empty($plugin)) {
+    return "plugins/" . $plugin;
+  }
 }
 
-function mymodule_autocomplete() {
-  $result = array();
-  for($i = 0; $i < 10; $i++) {
-    $result[$i] = new stdClass;
-    $result[$i]->title = 'Test ' . $i;
-    $result[$i]->path = 'test-path/' . $i;
-    $result[$i]->description = 'Test description ' . $i;
-  }
-
-  $matches = array();
-
-  foreach ($result AS $test) {
-    $matches[] = array(
-      'title' => $test->title,
-      'description' => $test->description,
-      'path' => $test->path,
-      'group' => t('Test'),
-    );
-  }
-  return $matches;
-}
 
 function mymodule_query_linkit_user_autocomplete_alter(QueryAlterableInterface $query) {
   // Existing query orderBys.
