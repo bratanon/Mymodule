@@ -9,7 +9,7 @@ function mymodule_linkit_attributes($profile) {
   $attributes['my_attribute'] = array(
     '#type' => 'textfield',
     '#title' => t('My Attribute'),
-    '#maxlength' => 255,  
+    '#maxlength' => 255,
     '#size' => 40,
     '#default_value' => '',
     '#weight' => isset($profile->data['attributes']['my_attribute']['weight']) ? $profile->data['attributes']['my_attribute']['weight'] : 0,
@@ -24,8 +24,8 @@ function mymodule_linkit_attributes_alter(&$attributes) {
   $attributes['rel']['#type'] = 'select';
   $attributes['rel']['#title'] = t('Rel select');
   $attributes['rel']['#options'] = array(
-    '' => t('None'), 
-    'now-follow' => t('No follow'), 
+    '' => t('None'),
+    'no-follow' => t('No follow'),
     'other-rel' =>t('Other rel'),
   );
   $attributes['rel']['#size'] = 1;
@@ -45,7 +45,7 @@ function mymodule_linkit_plugins() {
 
 function mymodule_autocomplete() {
   $result = array();
-  for($i = 0; $i < 10; $i++) {
+  for ($i = 0; $i < 10; $i++) {
     $result[$i] = new stdClass;
     $result[$i]->title = 'Test ' . $i;
     $result[$i]->path = 'test-path/' . $i;
