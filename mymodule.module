@@ -1,7 +1,4 @@
 <?php
-
-
-
 /**
  * Implements hook_linkit_attributes().
  */
@@ -42,8 +39,27 @@ function mymodule_ctools_plugin_directory($module, $plugin) {
   }
 }
 
-
 function mymodule_query_linkit_user_autocomplete_alter(QueryAlterableInterface $query) {
   // Existing query orderBys.
   $orderby =& $query->getOrderBy();
+}
+
+/**
+ * Implements hook_entity_info().
+ */
+function mymodule_entity_info() {
+  return array(
+    'mymodule_entity' => array(
+      'label' => t('My module entity'),
+      'entity class' => 'Entity',
+      'controller class' => 'EntityAPIController',
+      'base table' => 'mymodule_entity',
+      'uri callback' => 'entity_class_uri',
+      'entity keys' => array(
+        'id' => 'id',
+        'label' => 'label',
+      ),
+      'linkit' => TRUE,
+    ),
+  );
 }

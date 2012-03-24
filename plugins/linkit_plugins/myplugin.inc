@@ -5,8 +5,8 @@
  */
 
 $plugin = array(
-  'title' => t("Mymodule"),
-  'description' => t('Enables mymodule results'),
+  'ui_title' => t("Mymodule"),
+  'ui_description' => t('Enables mymodule results'),
   'handler' => array(
       'class' => 'MymoduleLinkitPlugin',
       'file' => 'myplugin.class.php',
