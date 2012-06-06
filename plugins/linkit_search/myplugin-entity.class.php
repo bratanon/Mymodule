@@ -3,7 +3,7 @@
  * @file
  * Define Linkit node plugin class.
  */
-class LinkitPluginMymodule_entity extends LinkitPluginEntity {
+class LinkitPluginMymoduleEntity extends LinkitSearchPluginEntity {
 
   /**
    * Return a string representing this handler's name in the UI.
