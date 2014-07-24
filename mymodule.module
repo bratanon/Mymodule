@@ -1,34 +1,8 @@
 <?php
 /**
- * Implements hook_linkit_attributes().
+ * @file
+ * Mymudoule is a linkit extender example module.
  */
-function mymodule_linkit_attributes($profile) {
-  // The array key here will be the attribute that is inserted.
-  // I.E <a my_attribute="value"></a>.
-  $attributes['my_attribute'] = array(
-    '#type' => 'textfield',
-    '#title' => t('My Attribute'),
-    '#maxlength' => 255,
-    '#size' => 40,
-    '#default_value' => '',
-    '#weight' => isset($profile->data['attributes']['my_attribute']['weight']) ? $profile->data['attributes']['my_attribute']['weight'] : 0,
-  );
-  return $attributes;
-}
-
-/**
- * Implements hook_linkit_attributes_alter().
- */
-function mymodule_linkit_attributes_alter(&$attributes) {
-  $attributes['rel']['#type'] = 'select';
-  $attributes['rel']['#title'] = t('Rel select');
-  $attributes['rel']['#options'] = array(
-    '' => t('None'),
-    'no-follow' => t('No follow'),
-    'other-rel' =>t('Other rel'),
-  );
-  $attributes['rel']['#size'] = 1;
-}
 
 /**
  * Implements hook_ctools_plugin_directory().
@@ -37,29 +11,4 @@ function mymodule_ctools_plugin_directory($module, $plugin) {
   if ($module == 'linkit' && !empty($plugin)) {
     return "plugins/" . $plugin;
   }
-}
-
-function mymodule_query_linkit_user_autocomplete_alter(QueryAlterableInterface $query) {
-  // Existing query orderBys.
-  $orderby =& $query->getOrderBy();
-}
-
-/**
- * Implements hook_entity_info().
- */
-function mymodule_entity_info() {
-  return array(
-    'mymodule_entity' => array(
-      'label' => t('My module entity'),
-      'entity class' => 'Entity',
-      'controller class' => 'EntityAPIController',
-      'base table' => 'mymodule_entity',
-      'uri callback' => 'entity_class_uri',
-      'entity keys' => array(
-        'id' => 'id',
-        'label' => 'label',
-      ),
-      'linkit' => TRUE,
-    ),
-  );
 }
