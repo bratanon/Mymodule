@@ -12,3 +12,14 @@ function mymodule_ctools_plugin_directory($module, $plugin) {
     return "plugins/" . $plugin;
   }
 }
+
+/**
+ * Implementation of hook_ctools_plugin_api().
+ *
+ * Tell CTools that we support the default_mymodule_presets API.
+ */
+function mymodule_ctools_plugin_api($module, $api) {
+  if ($module == 'linkit' && $api == 'linkit_profiles') {
+    return array('version' => 1);
+  }
+}
